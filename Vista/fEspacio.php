@@ -38,9 +38,9 @@
         <nav class="navbar navbar-expand-lg bg-transparent sticky-top">
             <div class="container">
                 <!-- Logo -->
-                <a class="navbar-brand" href="../index.html">
+                <!-- <a class="navbar-brand" href="../index.html">
                     <img src="../imagenes/logoipsum-logo-16.svg" alt="" />
-                </a>
+                </a> -->
                 <!-- Pestañas -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
