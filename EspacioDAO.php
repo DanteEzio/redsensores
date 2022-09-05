@@ -60,37 +60,43 @@ class EspacioDAO
         $edif = new EdificioDAO($this->conexion);
         $pDAO = new ProfesorDAO($this->conexion);
 
-
-        //Llenamos siguiente tabla
+        //Llenamos la tabla Espacio
         $stm = $this->conexion->prepare("
 				insert into espacio(nombre, numero, descripcion, Profesor_idProfesor, Edificio_idEdificio) values(?,?,?,?,?)");
 
-        $temp = ($e->getNombre());
-        $temp2 = ($e->getNumero());
-        $temp3 = ($e->getDescripcion());
-        $temp4 = ($pDAO->buscarIdProfesor($e->getEncargado()->getNombre()));
-        $temp5 = ($edif->buscarIdEdificio($e->getEdificio()->getNombre()));
-        $stm->bind_param("sisii", $temp, $temp2, $temp3, $temp4, $temp5);
+        $profesores = array($e->getProfesores());
+
+        for($i=0; $i<count($profesores); $i++){
+            $temp = ($e->getNombre());
+            $temp2 = ($e->getNumero());
+            $temp3 = ($e->getDescripcion());
+            $temp5 = ($edif->buscarIdEdificio($e->getEdificio()->getNombre()));
+            $temp4 = ($profesores[$i]);
+            $stm->bind_param("sisii", $temp, $temp2, $temp3, $temp4, $temp5);
+        }
         $stm->execute();
-
-
-        $sql = "SELECT MAX(iddireccion) AS id FROM direccion";
-        $sql = "SELECT MAX(Espacio_idEspacio) AS id FROM encargadoprofesorhistorico";
+        
+        $sql = "SELECT MAX(idEspacio) AS id FROM espacio";
         $result = $this->conexion->query($sql);
         $row = $result->fetch_assoc();
         $id = $row["id"];
 
         //Llenamos tabla Encargado Profesor Historico
         $stm = $this->conexion->prepare("
-				insert into encargadoprofesorhistorico(Espacio_idEspacio,Profesor_idProfesor, fecha) 
-				values(?,?,?)");
-        $temp6 = ($e->getProfesores());
+				insert into encargadoprofesorhistorico(Espacio_idEspacio,Profesor_idProfesor, fecha) values(?,?,?)");
+        $temp6 = ($pDAO->buscarIdProfesor($e->getEncargado()->getNombre()));
         $temp7 = ($e->getFecha());
 
         $stm->bind_param("iis", $id, $temp6, $temp7);
-
-
         $stm->execute();
+
+        //Llenamos tabla espacio_has_profesor
+        $stm = $this->conexion->prepare("insert into espacio_has_profesor(Espacio_idEspacio, Profesor_idProfesor) values(?,?)");
+
+        $stm->bind_param("ii", $id, $temp6);
+        $stm->execute();
+
+        //Cerramos conexión
         $stm->close();
         $this->conexion->close();
     }

@@ -25,6 +25,15 @@ $encargado = $pDAO->buscarIdProfesor("Rafael Perez");
 echo $encargado;
 
 $profesores = array(1, 2, 3);
+
+// $profesores = array($e->getProfesores());
+
+for ($i = 0; $i < count($profesores); $i++) {
+    $temp4 = ($profesores[$i]);
+    echo $temp4;
+}
+
+// var_dump($temp4);
 // var_dump($profesores);
 
 $dDAO = new DepartamentoDAO($conn);
@@ -36,7 +45,7 @@ $profesorEnc = new Profesor($encargado, "Rafael Perez", $departamento);
 // $profesores = [1,2,3,4];
 
 
-$espacio = new Espacio(1, $edificio, 305, $profesorEnc, $profesores, "Sala", "Muchos alumnos", "05/09/2022");
+$espacio = new Espacio(1, $edificio, 305, $profesorEnc, $profesores, "Sala", "Muchos alumnos", "2022-09-05");
 
 $objEspacio = new EspacioDAO($conn);
 $insert = $objEspacio->insertaEspacio($espacio);
