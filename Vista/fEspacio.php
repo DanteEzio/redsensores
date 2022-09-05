@@ -97,11 +97,12 @@
                             </select>
                         </div>
 
-                        <!-- Nombre del Profesor Encargado -->
-                        <div class="mb-3 pEncargado">
-                            <label for="exampleInputEmail1" class="form-label">Profesor Encargado: </label>
-                            <select class="form-select profesorEncargado" name="profesorEncargado" aria-label="Default select example" id="profesorEncargado">
-                            </select>
+                        <!-- Nombre del Espacio -->
+                        <div class="mb-3 nEspacio">
+                            <label for="exampleInputEmail1" class="form-label">Nombre del Espacio:</label>
+                            <div class="mb-3">
+                                <input type="text" name="nombreEspacio" class="form-control nombreEspacio" id="nombreEspacio" aria-describedby="emailHelp" placeholder="Ingresa el Nombre del Espacio" />
+                            </div>
                         </div>
 
                         <!-- Numero del espacio -->
@@ -112,27 +113,32 @@
                             </div>
                         </div>
 
-                        <!-- Profesores que se encuentran en ese Lugar -->
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Profesores que se encuentran en ese Espacio:</label>
-                            <div class="row container-fluid" id="profesores">
-                            </div>
-                        </div>
-
-                        <!-- Nombre del Espacio -->
-                        <div class="mb-3 nEspacio">
-                            <label for="exampleInputEmail1" class="form-label">Nombre del Espacio:</label>
-                            <div class="mb-3">
-                                <input type="text" name="nombreEspacio" class="form-control nombreEspacio" id="nombreEspacio" aria-describedby="emailHelp" placeholder="Ingresa el Nombre del Espacio" />
-                            </div>
-                        </div>
-
                         <!-- Descripción del Espacio -->
                         <div class="mb-3 dEspacio">
                             <label for="exampleInputEmail1" class="form-label">Descripción del espacio:</label>
                             <div class="mb-3">
                                 <textarea type="text" name="descripcion" class="form-control descripcion" id="descripcion" rows="3" placeholder="Ingresa la Descripción del espacio"></textarea>
                             </div>
+                        </div>
+
+                        <!-- Profesores que se encuentran en ese Espacio -->
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Profesores que se encuentran en ese Espacio:</label>
+                            <div class="row container-fluid" id="profesores">
+                            </div>
+                        </div>
+
+                        <!-- Nombre del Profesor Encargado -->
+                        <div class="mb-3 pEncargado">
+                            <label for="exampleInputEmail1" class="form-label">Profesor Encargado: </label>
+                            <select class="form-select profesorEncargado" name="profesorEncargado" aria-label="Default select example" id="profesorEncargado">
+                            </select>
+                        </div>
+
+                        <!-- Fecha desde que se encuentra enrcargado -->
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label fechaIngreso">Fecha de ingreso como encargado</label>
+                            <input type="date" class="form-control" id="fechaIngreso" name="fechaIngreso" aria-describedby="emailHelp" />
                         </div>
 
                         <div class="botonEnviar">

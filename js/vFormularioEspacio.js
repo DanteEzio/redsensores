@@ -32,7 +32,8 @@ function Espacio(
   numero,
   profesor,
   nombreEspacio,
-  descripcion
+  descripcion,
+  fecha
 ) {
   this.nombreEdificio = nombreEdificio;
   this.profesorEncargado = profesorEncargado;
@@ -40,6 +41,7 @@ function Espacio(
   this.profesor = profesor;
   this.nombreEspacio = nombreEspacio;
   this.descripcion = descripcion;
+  this.fecha = fecha;
 }
 
 function validarFormulario() {
@@ -49,7 +51,8 @@ function validarFormulario() {
     document.querySelector("#numero").value,
     document.querySelector("#profesor").value,
     document.querySelector("#nombreEspacio").value,
-    document.querySelector("#descripcion").value
+    document.querySelector("#descripcion").value,
+    document.querySelector("#fechaIngreso").value
   );
   if (esp.nombreEdificio <= 0 || esp.nombreEdificio > 4) {
     Swal.fire({
@@ -105,6 +108,18 @@ function validarFormulario() {
       position: "center",
       icon: "warning",
       title: "No has ingresado la descripcion del espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
+    return;
+  }
+  if (esp.fecha.length == 0) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has ingresado la Fecha de Cita",
       showConfirmButton: false,
       background: "#f399249a",
       color: "#eee",
