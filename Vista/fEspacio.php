@@ -19,12 +19,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../css/main.css" />
 
+    <!-- SweetAlert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Archivos JS -->
     <script defer src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!-- <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
-
 
     <!-- Archivos JS -->
     <script defer src="../js/selectEspacio.js"></script>
@@ -61,6 +60,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="fEspacio.php">Formulario Espacio</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="bProfesores.php">Buscador</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +88,7 @@
             <!-- Formularios -->
             <section class="formularios mx-auto">
                 <div class="container categoria">
-                    <form id="formData2" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+                    <form action="" id="formData2" method="POST">
                         <h3>Información del Espacio</h3>
                         <!-- Nombre del Edificio -->
                         <div class="mb-3 nEdificio">

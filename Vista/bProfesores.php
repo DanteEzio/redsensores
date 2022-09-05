@@ -24,10 +24,14 @@
 
     <!-- Archivos JS -->
     <script defer src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+
 
     <!-- Archivos JS -->
-    <script defer src="../js/selectProfesor.js"></script>
-    <script defer src="../js/vFormularioProfesor.js"></script>
+    <script defer src="../js/pProfesores.js"></script>
+    <!-- <script defer src="../js/vFormularioProfesor.js"></script> -->
 
 </head>
 
@@ -36,7 +40,6 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-transparent sticky-top">
             <div class="container">
-                <!-- Pestañas -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -51,13 +54,13 @@
                         <!-- Pestañas izquierda -->
                         <ul class="navbar-nav justify-content-start align-items-center">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="fProfesor.php">Formulario Profesor</a>
+                                <a class="nav-link" aria-current="page" href="fProfesor.php">Formulario Profesor</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="fEspacio.php">Formulario Espacio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="bProfesores.php">Buscador</a>
+                                <a class="nav-link active" aria-current="page" href="bProfesores.php">Buscador</a>
                             </li>
                         </ul>
                     </div>
@@ -84,28 +87,35 @@
             <!-- Formularios -->
             <section class="formularios mx-auto">
                 <div class="container categoria">
-                    <form action="" id="formData" method="POST">
-                        <!-- Nombre Profesor -->
-                        <h3>Información del Profesor</h3>
-                        <div class="mb-3 nProfesor">
-                            <label for="exampleInputEmail1" class="form-label">Nombre:</label>
+                    <section class="buscador">
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="formData" method="GET">
                             <div class="mb-3">
-                                <input type="name" name="nombreProfesor" class="form-control nombreProfesor" id="nombreProfesor" aria-describedby="emailHelp" placeholder="Ingresa el Nombre completo" />
+                                <label for="exampleFormControlInput1" class="form-label">Ingresa el nombre del registro que desea buscar:</label>
+                                <input id="campo" type="text" name="busqueda" class="form-control" id="exampleFormControlInput1" placeholder="Buscar">
                             </div>
-                        </div>
-
-                        <!-- Departamento al que pertenece el Profesor -->
-                        <div class="mb-3 nDepartamento">
-                            <label for="exampleInputEmail1" class="form-label">Departamento: </label>
-                            <select class="form-select nombreDepartamento" name="nombreDepartamento" aria-label="Default select example" id="nombreDepartamento">
-                            </select>
-                        </div>
-
-
-                        <div class="botonEnviar">
-                            <button type="button" class="btn btn-primary enviar">Enviar</button>
-                        </div>
-                    </form>
+                            <div class="buscador">
+                                <button id="enviar" type="submit" name="campo" class="btn btn-primary enviar">Buscar</button>
+                            </div>
+                        </form>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#Id</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tabla">
+                                <!-- <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
             </section>
         </div>

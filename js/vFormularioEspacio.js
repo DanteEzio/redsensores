@@ -1,5 +1,30 @@
 console.log("funcionando 😍");
 
+function agregarDatos() {
+  // *** FETCH ***
+  fetch("../Controlador/insertaEdificioDAO.php", {
+    method: "POST",
+    body: new FormData(formData2),
+  })
+    .then((response) => response.text())
+    .then((response) => {
+      // console.log(response);
+      if (response == "ok") {
+        Swal.fire({
+          position: "center",
+          icon: "Success",
+          title: "Registro Éxitoso",
+          showConfirmButton: true,
+          background: "#75b900ab",
+          // backdrop: "#75b90030",
+          color: "#eee",
+          timer: 3000,
+        });
+        formData2.reset();
+      }
+    });
+}
+
 // *** Metodo Largo ***
 function Espacio(
   nombreEdificio,
@@ -27,62 +52,79 @@ function validarFormulario() {
     document.querySelector("#descripcion").value
   );
   if (esp.nombreEdificio <= 0 || esp.nombreEdificio > 4) {
-    alert("No has seleccionado un Edificio");
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has seleccionado un Edificio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
     return;
   }
   if (esp.profesorEncargado <= 0 || esp.profesorEncargado > 4) {
-    alert("No has seleccionado un Encargado");
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has seleccionado un Encargado",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
     return;
   }
   if (esp.profesor < 1 || esp.profesor > 4) {
-    alert(
-      "No has seleccionado los profesores que se encuentran en ese espacio"
-    );
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title:
+        "No has seleccionado los profesores que se encuentran en ese espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
     return;
   }
   if (esp.nombreEspacio.length == 0) {
-    alert("No has ingresado el nombre del espacio");
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has ingresado el nombre del espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
     return;
   }
   if (esp.descripcion.length == 0) {
-    alert("No has ingresado la descripcion del espacio");
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has ingresado la descripcion del espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
     return;
   }
 
-  //console.log(JSON.stringify(prof));
-  //document.getElementById("formData").submit();
+  agregarDatos();
 }
 
 let enviar = document.querySelector(".enviar");
 
-enviar.addEventListener("click", (e) => {
-  e.preventDefault();
+function insertaProfesor() {
+  enviar.addEventListener("click", (e) => {
+    e.preventDefault();
 
-  validarFormulario();
-  //console.log("funcionando...");
-  let datos = $("#formData2").serialize(); // A través del método serialize() estamos transformando la información que viene del formulario a una cadena de texto lo cual nos sirve para construir un dataString que puede recibir un archivo PHP cuando se ejecuta una llamada AJAX
-    console.log(datos);
-    //return false
-  $.ajax({
-    type: "POST",
-    url: "../testEspacioDAO.php",
-    data: datos,
-    success: function (response) {
-      if (response == 1) {
-        alert("Agregado con éxito");
-      } else {
-        alert("Fallo el server");
-      }
-    },
+    validarFormulario();
   });
-  return false; // Con esto estamos evitando que recargue la página
-});
-
-function recargarPagina() {
-  if (window.history.replaceState) {
-    // verificamos disponibilidad
-    window.history.replaceState(null, null, window.location.href);
-  }
 }
 
-recargarPagina();
+insertaProfesor();
+

@@ -14,7 +14,7 @@ function cargarDepartamentos() {
         '<option value="0" selected> Seleccionar Departamento</option>';
 
       departamentos.forEach((departamento) => {
-        template += `<option value="${departamento.idDepartamento}">${departamento.nDepartamento}</option>`;
+        template += `<option value="${departamento.nDepartamento}">${departamento.nDepartamento}</option>`;
       });
 
       departamento.innerHTML = template; //Agregamos nuestro nuevo SELECT

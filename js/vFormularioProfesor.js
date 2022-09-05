@@ -1,5 +1,48 @@
 console.log("funcionando 😍");
 
+function agregarDatos() {
+  // *** Método AJAX ***
+  // let datos = $("#formData").serialize();
+  // console.log(datos);
+
+  // $.ajax({
+  //   method: "POST",
+  //   url: "../Controlador/insertaProfesorDAO.php",
+  //   data: datos,
+  //   success: function (response) {
+
+  //     if (response.status == 200) {
+  //       alert("Registro Exitoso")
+  //     } else {
+  //       alert("Error de Registro")
+  //     }
+  //   },
+  // });
+
+  // *** FETCH ***
+  fetch("../Controlador/insertaProfesorDAO.php", {
+    method: "POST",
+    body: new FormData(formData),
+  })
+    .then((response) => response.text())
+    .then((response) => {
+      // console.log(response);
+      if (response == "ok") {
+        Swal.fire({
+          position: "center",
+          icon: "Success",
+          title: "Registro Éxitoso",
+          showConfirmButton: true,
+          background: "#75b900ab",
+          // backdrop: "#75b90030",
+          color: "#eee",
+          timer: 3000,
+        });
+        formData.reset();
+      }
+    });
+}
+
 // *** Metodo Largo ***
 function Profesor(nProfesor, nDepartamento) {
   this.nProfesor = nProfesor;
@@ -12,47 +55,52 @@ function validarFormulario() {
     document.querySelector("#nombreDepartamento").value
   );
   if (prof.nProfesor.length == 0) {
-    alert("No has escrito un nombre");
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has escrito un nombre",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
     return;
   }
+  // alert("No has escrito un nombre");
+
   if (prof.nDepartamento <= 0 || prof.nDepartamento > 5) {
-    alert("No has seleccionado un Departamento");
+     Swal.fire({
+       position: "center",
+       icon: "warning",
+       title: "No has seleccionado un Departamento",
+       showConfirmButton: false,
+       background: "#f399249a",
+       color: "#eee",
+       timer: 3000,
+     });
     return;
   }
 
-  //console.log(JSON.stringify(prof));
-  //document.getElementById("formData").submit();
+  agregarDatos();
 }
 
 let enviar = document.querySelector(".enviar");
 
-enviar.addEventListener("click", (e) => {
+function insertaProfesor() {
+  enviar.addEventListener("click", (e) => {
     e.preventDefault();
 
     validarFormulario();
-  //console.log("funcionando...");
-    let datos = $("#formData").serialize(); // A través del método serialize() estamos transformando la información que viene del formulario a una cadena de texto lo cual nos sirve para construir un dataString que puede recibir un archivo PHP cuando se ejecuta una llamada AJAX
-    console.log(datos);
-    $.ajax({
-      type: "POST",
-      url: "../testProfesorDAO.php",
-      data: datos,
-      success: function (response) {
-        if (response == 1) {
-          alert("Agregado con éxito");
-        } else {
-          alert("Fallo el server");
-        }
-      }
-    });
-    return false; // Con esto estamos evitando que recargue la página
-});
-
-function recargarPagina() {
-  if (window.history.replaceState) {
-    // verificamos disponibilidad
-    window.history.replaceState(null, null, window.location.href);
-  }
+  });
 }
 
-recargarPagina();
+insertaProfesor();
+
+// *** Ya no se necesita, ya que, ya no se recarga nuestra página ***
+// function recargarPagina() {
+//   if (window.history.replaceState) {
+//     // verificamos disponibilidad
+//     window.history.replaceState(null, null, window.location.href);
+//   }
+// }
+// recargarPagina();

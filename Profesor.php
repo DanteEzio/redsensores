@@ -42,8 +42,18 @@ class Profesor
         return $this->departamento;
     }
 
+    //Arreglo asociativo para ocnvertir a JSON
+    function toJSON(): array
+    {
+        return [
+            "idProfesor" => $this->idProfesor,
+            "nombreProfesor" => $this->nombre,
+            "departamento" => $this->departamento->toJSON()
+        ];
+    }
+
     function toString(): string
     {
-        return "Id: " . $this->getIdProfesor() . ",Nombre: " . $this->getNombre() . ", Departamento" . $this->getDepartamento()->toString() . "";
+        return "Id: " . $this->getIdProfesor() . ",Nombre: " . $this->getNombre() . ", Departamento: " . $this->getDepartamento()->toString() . "";
     }
 }

@@ -1,8 +1,8 @@
 <?php
-	include "Edificio.php";
-	include "Departamento.php";
-	include "Profesor.php";
-	include "Espacio.php";
+	include "../Edificio.php";
+	include "../Departamento.php";
+	include "../Profesor.php";
+	include "../Espacio.php";
 	
 	$ed1= new Edificio(1,"Edificio T");
 	$ed2= new Edificio(2,"Edificio H");
@@ -17,10 +17,13 @@
 	array_push($misprofesores,$p2);
 	array_push($misprofesores,$p3);
 	
-	$espacio= new Espacio(1,$ed1,$p1,306,$misprofesores,"Salon","Salon lleno");
+	$espacio= new Espacio(1,$ed1, 306, $p1,$misprofesores,"Salon","Salon lleno");
 	
 	
-	echo $ed1->toString(). "<br> <br>";
-	echo $dpto1->toString(). "<br> <br>";
+	// echo $ed1->toString(). "<br> <br>";
+	// echo $dpto1->toString(). "<br> <br>";
 	echo $p1->toString(). "<br> <br>";
-	echo $espacio->toString(). "<br> <br>";
+// echo $espacio->toString(). "<br> <br>";
+
+
+

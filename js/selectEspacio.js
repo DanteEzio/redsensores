@@ -66,6 +66,7 @@ function cargarProfesores() {
   });
 }
 
+
 cargarEdificios();
 cargarProfesorEncargado();
 cargarProfesores();

@@ -3,22 +3,24 @@ class Espacio
 {
     private $idEspacio;
     private $edificio; //Edificio en el que vive el espacio
-    private $encargado; // Un dato tipo profesor que representa al encargado
     private $numero; //Numero del espacio
+    private $encargado; // Un dato tipo profesor que representa al encargado
     private $profesores = array(); //Coleccion de datos tipo profesor
     private $nombre; //Coleccion de datos tipo profesor
     private $descripcion; //Coleccion de datos tipo profesor
+    private $fecha;
 
 
-    function __construct($idEspacio, $edificio, $encargado, $numero, $profesores, $nombre, $descripcion)
+    function __construct($idEspacio, $edificio, $numero, $encargado, $profesores, $nombre, $descripcion, $fecha)
     {
         $this->idEspacio = $idEspacio;
         $this->edificio = new Edificio($edificio->getIdEdificio(), $edificio->getNombre());
-        $this->encargado = new Profesor($encargado->getIdProfesor(), $encargado->getNombre(), $encargado->getDepartamento());
         $this->numero = $numero;
+        $this->encargado = new Profesor($encargado->getIdProfesor(), $encargado->getNombre(), $encargado->getDepartamento());
         $this->profesores = $profesores;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
+        $this->fecha = $fecha;
     }
 
     function __destruct()
@@ -48,6 +50,11 @@ class Espacio
     function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
+    }
+
+    function setFecha($fecha)
+    {
+        $this->$fecha = $fecha;
     }
 
     function getIdEspacio(): int
@@ -86,6 +93,11 @@ class Espacio
         return $this->descripcion;
     }
 
+    function getFecha(): string
+    {
+        return $this->fecha;
+    }
+
     function agregaProfesor($profesor)
     {
         array_push($this->profesores, $profesor);
@@ -105,6 +117,20 @@ class Espacio
         return $cadena;
     }
 
+    //Arreglo asociativo para convertir a JSON
+    function toJSON(): array
+    {
+        return [
+            "IdEspacio" => $this->IdEspacio,
+            "Edificio" => $this->Edificio,
+            "Encargado" => $this->Encargado,
+            "Nombre" => $this->Nombre,
+            "Descripcion" => $this->Descripcion,
+            "Profesores" => $this->Profesores->toJSON(),
+            "Fecha" => $this->Fecha
+        ];
+    }
+
     function toString(): string
     {
         return "IdEspacio: " . $this->getIdEspacio() .
@@ -113,6 +139,7 @@ class Espacio
 			Encargado:" . $this->getEncargado()->toString() . ",
 			Nombre:" . $this->getNombre() . ",
 			Descripcion:" . $this->getDescripcion() . ",
-			Profesores:" . $this->muestraProfesores();
+			Profesores:" . $this->muestraProfesores() . ",
+            Fecha: " . $this->getFecha();
     }
 }
