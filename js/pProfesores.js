@@ -42,10 +42,10 @@ function recuperaProfesor() {
     });
 }
 
-// recuperaProfesor();
+recuperaProfesor();
 
-let buscar = document.querySelector(".enviar");
+// let buscar = document.querySelector(".enviar");
 
-buscar.addEventListener("click", () => {
-  recuperaProfesor();
-});
+// buscar.addEventListener("click", () => {
+//   recuperaProfesor();
+// });

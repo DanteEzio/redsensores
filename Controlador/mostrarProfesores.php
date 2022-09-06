@@ -1,6 +1,8 @@
 <?php
 include '../Modelo/conexion.php';
-include '../ProfesorDAO.php';
+include '../Modelo/ProfesorDAO.php';
+include "../Departamento.php";
+include "../Profesor.php";
 
 $jsonString = new ProfesorDAO($conn); //Llamamos a nuestra function
 
