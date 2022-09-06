@@ -63,31 +63,6 @@ function validarFormulario() {
     });
     return;
   }
-  if (esp.profesorEncargado <= 0 || esp.profesorEncargado > 4) {
-    Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "No has seleccionado un Encargado",
-      showConfirmButton: false,
-      background: "#f399249a",
-      color: "#eee",
-      timer: 3000,
-    });
-    return;
-  }
-  if (esp.profesor < 1 || esp.profesor > 4) {
-    Swal.fire({
-      position: "center",
-      icon: "warning",
-      title:
-        "No has seleccionado los profesores que se encuentran en ese espacio",
-      showConfirmButton: false,
-      background: "#f399249a",
-      color: "#eee",
-      timer: 3000,
-    });
-    return;
-  }
   if (esp.nombreEspacio.length == 0) {
     Swal.fire({
       position: "center",
@@ -100,11 +75,48 @@ function validarFormulario() {
     });
     return;
   }
+  if (esp.numero.length == 0) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has ingresado un numero de espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
+    return;
+  }
   if (esp.descripcion.length == 0) {
     Swal.fire({
       position: "center",
       icon: "warning",
       title: "No has ingresado la descripcion del espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
+    return;
+  }
+  if (esp.profesor < 1) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title:
+        "No has seleccionado los profesores que se encuentran en ese espacio",
+      showConfirmButton: false,
+      background: "#f399249a",
+      color: "#eee",
+      timer: 3000,
+    });
+    return;
+  }
+  if (esp.profesorEncargado <= 0 || esp.profesorEncargado > 4) {
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "No has seleccionado un Encargado",
       showConfirmButton: false,
       background: "#f399249a",
       color: "#eee",
