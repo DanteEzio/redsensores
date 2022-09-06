@@ -2,13 +2,13 @@ console.log("funcionando 😍");
 
 function agregarDatos() {
   // *** FETCH ***
-  fetch("../Controlador/insertaEdificioDAO.php", {
+  fetch("../Controlador/insertaEspacioDAO.php", {
     method: "POST",
     body: new FormData(formData2),
   })
     .then((response) => response.text())
     .then((response) => {
-      // console.log(response);
+      console.log(response);
       if (response == "ok") {
         Swal.fire({
           position: "center",
@@ -32,8 +32,7 @@ function Espacio(
   numero,
   profesor,
   nombreEspacio,
-  descripcion,
-  fecha
+  descripcion
 ) {
   this.nombreEdificio = nombreEdificio;
   this.profesorEncargado = profesorEncargado;
@@ -41,7 +40,6 @@ function Espacio(
   this.profesor = profesor;
   this.nombreEspacio = nombreEspacio;
   this.descripcion = descripcion;
-  this.fecha = fecha;
 }
 
 function validarFormulario() {
@@ -49,10 +47,9 @@ function validarFormulario() {
     document.querySelector("#nombreEdificio").value,
     document.querySelector("#profesorEncargado").value,
     document.querySelector("#numero").value,
-    document.querySelector("#profesor").value,
+    document.querySelector("#profesores").value,
     document.querySelector("#nombreEspacio").value,
-    document.querySelector("#descripcion").value,
-    document.querySelector("#fechaIngreso").value
+    document.querySelector("#descripcion").value
   );
   if (esp.nombreEdificio <= 0 || esp.nombreEdificio > 4) {
     Swal.fire({
@@ -115,19 +112,8 @@ function validarFormulario() {
     });
     return;
   }
-  if (esp.fecha.length == 0) {
-    Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "No has ingresado la Fecha de Cita",
-      showConfirmButton: false,
-      background: "#f399249a",
-      color: "#eee",
-      timer: 3000,
-    });
-    return;
-  }
 
+console.log(JSON.stringify(esp));
   agregarDatos();
 }
 

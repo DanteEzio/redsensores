@@ -8,10 +8,9 @@ class Espacio
     private $profesores = array(); //Coleccion de datos tipo profesor
     private $nombre; //Coleccion de datos tipo profesor
     private $descripcion; //Coleccion de datos tipo profesor
-    private $fecha;
 
 
-    function __construct($idEspacio, $edificio, $numero, $encargado, $profesores, $nombre, $descripcion, $fecha)
+    function __construct($idEspacio, $edificio, $numero, $encargado, $profesores, $nombre, $descripcion)
     {
         $this->idEspacio = $idEspacio;
         $this->edificio = new Edificio($edificio->getIdEdificio(), $edificio->getNombre());
@@ -20,7 +19,6 @@ class Espacio
         $this->profesores = $profesores;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
-        $this->fecha = $fecha;
     }
 
     function __destruct()
@@ -50,11 +48,6 @@ class Espacio
     function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
-    }
-
-    function setFecha($fecha)
-    {
-        $this->$fecha = $fecha;
     }
 
     function getIdEspacio(): int
@@ -93,11 +86,6 @@ class Espacio
         return $this->descripcion;
     }
 
-    function getFecha(): string
-    {
-        return $this->fecha;
-    }
-
     function agregaProfesor($profesor)
     {
         array_push($this->profesores, $profesor);
@@ -126,8 +114,7 @@ class Espacio
             "Encargado" => $this->Encargado,
             "Nombre" => $this->Nombre,
             "Descripcion" => $this->Descripcion,
-            "Profesores" => $this->Profesores->toJSON(),
-            "Fecha" => $this->Fecha
+            "Profesores" => $this->Profesores->toJSON()
         ];
     }
 
@@ -139,7 +126,6 @@ class Espacio
 			Encargado:" . $this->getEncargado()->toString() . ",
 			Nombre:" . $this->getNombre() . ",
 			Descripcion:" . $this->getDescripcion() . ",
-			Profesores:" . $this->muestraProfesores() . ",
-            Fecha: " . $this->getFecha();
+			Profesores:" . $this->muestraProfesores();
     }
 }

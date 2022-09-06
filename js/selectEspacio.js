@@ -14,7 +14,7 @@ function cargarEdificios() {
         '<option value="0" selected> Seleccionar Edificio...</option>';
 
       edificios.forEach((edificio) => {
-        template += `<option value="${edificio.idEdificio}">${edificio.nEdificio}</option>`;
+        template += `<option value="${edificio.nEdificio}">${edificio.nEdificio}</option>`;
       });
 
       edificio.innerHTML = template; //Agregamos nuestro nuevo SELECT
@@ -34,7 +34,7 @@ function cargarProfesorEncargado() {
         '<option value="0" selected> Seleccionar Profesor...</option>';
 
       profesores.forEach((encargado) => {
-        template += `<option value="${encargado.idProfesor}">${encargado.nProfesor}</option>`;
+        template += `<option value="${encargado.nProfesor}">${encargado.nProfesor}</option>`;
       });
 
       encargado.innerHTML = template; //Agregamos nuestro nuevo SELECT
@@ -50,15 +50,11 @@ function cargarProfesores() {
       //console.log(response)
       const profesores = JSON.parse(response); //Transformamos nuestra respuesta que se encuentra en texto plano a formato JSON
 
-      let template = "";
+      let template =
+        '<option value="0" disabled> Seleccionar Profesores...</option>';
 
       profesores.forEach((profesor) => {
-        template += `<div class="form-check col-6">
-                      <input class="form-check-input profesor" name="profesor" id="profesor" type="checkbox" value="${profesor.idProfesor}">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          ${profesor.nProfesor}
-                        </label>
-                    </div>`;
+        template += `<option value="${profesor.nProfesor}">${profesor.nProfesor}</option>`;
       });
 
       prof.innerHTML = template; //Agregamos nuestro nuevo SELECT

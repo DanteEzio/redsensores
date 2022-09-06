@@ -22,7 +22,7 @@ class EspacioDAO
 
     //     //Llenamos siguiente tabla
     //     $stm = $this->conexion->prepare("
-	// 			insert into espacio(nombre, numero, descripcion, Profesor_idProfesor, Edificio_idEdificio) values(?,?,?,?,?)");
+    // 			insert into espacio(nombre, numero, descripcion, Profesor_idProfesor, Edificio_idEdificio) values(?,?,?,?,?)");
 
     //     $temp = ($e->getNombre());
     //     $temp2 = ($e->getNumero());
@@ -41,14 +41,14 @@ class EspacioDAO
 
     //     //Llenamos tabla Encargado Profesor Historico
     //     $stm = $this->conexion->prepare("
-	// 			insert into encargadoprofesorhistorico(Espacio_idEspacio,Profesor_idProfesor, fecha) 
-	// 			values(?,?,?)");
+    // 			insert into encargadoprofesorhistorico(Espacio_idEspacio,Profesor_idProfesor, fecha) 
+    // 			values(?,?,?)");
     //     $temp6 = ($e->getProfesores());
     //     $temp7 = ($e->getFecha());
 
     //     $stm->bind_param("iis", $id, $temp6, $temp7);
 
-        
+
     //     $stm->execute();
     //     $stm->close();
     //     $this->conexion->close();
@@ -57,6 +57,7 @@ class EspacioDAO
 
     public function insertaEspacio($e)
     {
+        // echo $e->toString();
         $edif = new EdificioDAO($this->conexion);
         $pDAO = new ProfesorDAO($this->conexion);
 
@@ -64,37 +65,36 @@ class EspacioDAO
         $stm = $this->conexion->prepare("
 				insert into espacio(nombre, numero, descripcion, Profesor_idProfesor, Edificio_idEdificio) values(?,?,?,?,?)");
 
-        $profesores = array($e->getProfesores());
+        $temp = ($e->getNombre());
+        $temp2 = ($e->getNumero());
+        $temp3 = ($e->getDescripcion());
+        $temp5 = ($edif->buscarIdEdificio($e->getEdificio()->getNombre()));
+        $temp4 = ($pDAO->buscarIdProfesor($e->getEncargado()->getNombre()));
+        $stm->bind_param("sisii", $temp, $temp2, $temp3, $temp4, $temp5);
 
-        for($i=0; $i<count($profesores); $i++){
-            $temp = ($e->getNombre());
-            $temp2 = ($e->getNumero());
-            $temp3 = ($e->getDescripcion());
-            $temp5 = ($edif->buscarIdEdificio($e->getEdificio()->getNombre()));
-            $temp4 = ($profesores[$i]);
-            $stm->bind_param("sisii", $temp, $temp2, $temp3, $temp4, $temp5);
-        }
         $stm->execute();
-        
+
         $sql = "SELECT MAX(idEspacio) AS id FROM espacio";
         $result = $this->conexion->query($sql);
         $row = $result->fetch_assoc();
         $id = $row["id"];
 
-        //Llenamos tabla Encargado Profesor Historico
-        $stm = $this->conexion->prepare("
-				insert into encargadoprofesorhistorico(Espacio_idEspacio,Profesor_idProfesor, fecha) values(?,?,?)");
-        $temp6 = ($pDAO->buscarIdProfesor($e->getEncargado()->getNombre()));
-        $temp7 = ($e->getFecha());
-
-        $stm->bind_param("iis", $id, $temp6, $temp7);
-        $stm->execute();
-
         //Llenamos tabla espacio_has_profesor
-        $stm = $this->conexion->prepare("insert into espacio_has_profesor(Espacio_idEspacio, Profesor_idProfesor) values(?,?)");
+        $profesores = $e->getProfesores();
 
-        $stm->bind_param("ii", $id, $temp6);
-        $stm->execute();
+        for ($i = 0; $i < count($profesores); $i++) {
+
+            // echo $profesores[$i]->toString();
+            $stm = $this->conexion->prepare("insert into espacio_has_profesor(Espacio_idEspacio, Profesor_idProfesor) values(?,?)");
+
+
+            $temp6 = ($pDAO->buscarIdProfesor($profesores[$i]->getNombre()));
+            // $temp6 = ($pDAO->buscarIdProfesor($profesores[$i]->getNombre()));
+
+            $stm->bind_param("ii", $id, $temp6);
+            $stm->execute();
+
+        }
 
         //Cerramos conexión
         $stm->close();

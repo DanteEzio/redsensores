@@ -122,10 +122,15 @@
                         </div>
 
                         <!-- Profesores que se encuentran en ese Espacio -->
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Profesores que se encuentran en ese Espacio:</label>
                             <div class="row container-fluid" id="profesores">
                             </div>
+                        </div> -->
+                        <div class="mb-3 pEspacio">
+                            <label for="exampleInputEmail1" class="form-label">Profesores que se encuentran en ese Espacio:</label>
+                            <select class="form-control selectpicker profesores" name="profesores[]" aria-label="multiple select example" id="profesores" multiple>
+                            </select>
                         </div>
 
                         <!-- Nombre del Profesor Encargado -->
@@ -136,10 +141,10 @@
                         </div>
 
                         <!-- Fecha desde que se encuentra enrcargado -->
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label fechaIngreso">Fecha de ingreso como encargado</label>
                             <input type="date" class="form-control" id="fechaIngreso" name="fechaIngreso" aria-describedby="emailHelp" />
-                        </div>
+                        </div> -->
 
                         <div class="botonEnviar">
                             <button type="button" class="btn btn-primary enviar">Enviar</button>

@@ -70,6 +70,16 @@ class ProfesorDAO
 		return $idProfesor;
 	}
 
+	public function buscarIdDepartamentoProfesor($prof): int
+	{
+		$sql = "SELECT * FROM profesor WHERE nombre = '$prof';";
+		$result = $this->conexion->query($sql);
+		if ($row = $result->fetch_assoc()) {
+			$Departamento_idDepartamento = $row['Departamento_idDepartamento'];
+		}
+		return $Departamento_idDepartamento;
+	}
+
 	public function buscarProfesor($prof): string
 	{
 		$sql = "SELECT * FROM profesor WHERE nombre = '$prof';";
